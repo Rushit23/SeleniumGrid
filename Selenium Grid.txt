@@ -1,0 +1,483 @@
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+								Selenium GriD
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+1.
+
+
+Download The Selenium Server Jar
+
+Google : Selenium Downloads
+
+https://www.seleniumhq.org/download/
+
+Search : Selenium Standalone Server
+
+Selenium Server(Formerly for Selenium RC Server) [Will Come as a Single Jar]
+
+Download the jar and 
+
+Put the jar into C Drive
+
+
+
+
+
+
+
+
+2.
+
+
+Go To Command prompt and start The Hub
+
+You Will Need To Create The Hub
+
+
+Excute This Command :
+
+cd../..
+						c:\>	java -jar selenium-server-standalone-3.141.59.jar -role hub
+
+
+Verify that server Started the machine or not :			 http://localhost:4444/grid/console
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3. 	 From Node Machine Verify Server is Up and Running:
+
+		http://iporhostnameofHub:4444/grid/console 
+
+		http://193.168.0.16:4444/grid/console  (Provide the ip of HUb)
+
+		
+
+
+
+Download The Selenium Server Jar
+
+Google : Selenium Downloads
+
+https://www.seleniumhq.org/download/
+
+Search : Selenium Standalone Server
+
+Selenium Server(Formerly for Selenium RC Server) [Will Come as a Single Jar]
+
+Download the jar and 
+
+Put the jar into C Drive
+
+
+
+
+
+4.
+
+
+Register Node with Hub
+
+Into Command Prompt Excute this Command
+
+
+Java –jar selenium-server-standalone-3.141.59.jar –role webdriver –hub http://iporhostnameofHub:4444/grid/register -port 5566
+
+Java –jar selenium-server-standalone-3.141.59.jar –role webdriver –hub http://193.168.0.16:4444/grid/register -port 5566
+
+
+
+
+
+
+
+
+
+5. 
+
+
+Verify Node is Registered
+
+Into Browser :
+
+
+http://localhost:4444/grid/console
+
+
+
+
+6. 
+
+
+
+Excute The Test Into Hub Machine
+
+Make Sure The Browser You Want to test is installed Within Respective Node And HUb Machine
+
+
+
+Provide the Path Of Respective Browser.exe  and Ip address of the node
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+									COMMANDS
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+My HUb IP :   193.168.0.16    192.168.0.14
+
+
+Node IP :   
+
+
+
+
+
+
+
+ In Hub Machine: 
+
+
+
+selenium-server-standalone-3.141.59
+
+java -jar selenium-server-standalone-3.141.59.jar -role hub
+
+http://localhost:4444/grid/console
+
+
+
+
+
+
+In Node Machine
+
+http://193.168.0.16:4444/grid/console 
+
+
+Java –jar selenium-server-standalone-3.141.59.jar –role webdriver –hub http://193.168.0.16:4444/grid/register -port 5566
+
+
+
+INto HUb:
+http://localhost:4444/grid/console
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+import static org.testng.Assert.assertEquals;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.Point;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+ 
+
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+
+
+
+
+public class Experiment3 
+{
+
+	public static void main(String[] args) throws MalformedURLException 
+	{
+
+		
+		  WebDriver driver;
+		  DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+		
+	      capabilities.setCapability(FirefoxDriver.BINARY,new File("C:/Program Files (x86)/Mozilla Firefox/firefox.exe").getAbsolutePath());
+	      capabilities.setCapability("marionette", false);
+	      driver = new RemoteWebDriver(new URL("http://192.168.0.12:5566/wd/hub"), capabilities);
+	     // driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);	
+		  
+		  
+	   //  driver.manage().window().maximize();
+	     driver.get("http://google.com");
+	     System.out.println(driver.getTitle());
+		
+	
+	
+	}
+	
+	
+	
+}
+
+
+	
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+								Selenium GriD
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Selenium Grid is Used to run multiple tests across diffrent browsers and operating systems in parallel
+
+
+Tests Run into Hub and gets executed into Node machines Parallel way
+
+
+Required When  we Need to run the tests into multiple browsers and Operating Systems and ir Saves Time
+
+
+
+Into COmpanies They Will Have Virtual Environment SetUp
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+									2Nd  Method
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+CREATING THE HUB
+------------------------
+
+Download the Selenium Server StandAlone Jar
+
+Into Command prompt
+
+java -jar (Drag and Drop The Jar) -role hub
+
+Verify Hub Is Running : 
+
+localhost:4444/grid/console
+
+
+
+
+
+
+CREATING THE NODE
+----------------------------
+
+
+java -jar (Drag and Drop The Jar) -role node -hub http://localhost:4444/grid/register
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+   
+	  // We have to mention browser which we want to use for test execution
+
+	     DesiredCapabilities cap=DesiredCapabilities.firefox();
+	      
+	     // Set the platform where we want to run our test- we can use MAC and Linux and other platforms as well
+
+	     cap.setPlatform(Platform.WINDOWS);
+	      
+	     // Here you can use hub address, hub will take the responsibility to execute the test on respective node
+
+	     URL url=new URL("http://localhost:4444/wd/hub");
+	      
+	     // Create driver with hub address and capability
+
+	     WebDriver driver=new RemoteWebDriver(url, cap);
+	      
+	     // start application
+
+	     driver.get("http://learn-automation.com/");
+	      
+	     // get the title and print the same
+
+	     System.out.println("Blog title is "+driver.getTitle());
+	      
+	     driver.close();
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	    If  you want to run the test  on diffrent environments  you  can use  cloud based services SauceLab, Browserstack
+
+	    Browserstack >  Create an account 
+
+	    Automate Link
+
+	    Browser stack home Page > Docs > Browser and platform > Automate (Top Bar)
+
+	    Automate > Docs
+
+	    They  Will Provide you  Usename and key
+
+
+--------------------------------------------------------------
+ https://www.browserstack.com/automate/java
+--------------------------------------------------------------
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Platform;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import java.net.URL;
+
+public class JavaSample {
+
+  public static final String USERNAME = "USERNAME";
+  public static final String AUTOMATE_KEY = "ACCESS_KEY";
+  public static final String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
+
+  public static void main(String[] args) throws Exception
+   {
+
+     DesiredCapabilities caps=DesiredCapabilities.firefox();
+
+      caps.setPlatform(Platform.WINDOWS);
+
+   
+
+    WebDriver driver = new RemoteWebDriver(new URL(URL), caps);
+    driver.get("http://www.google.com");
+    WebElement element = driver.findElement(By.name("q"));
+
+    element.sendKeys("BrowserStack");
+    element.submit();
+
+    System.out.println(driver.getTitle());
+    driver.quit();
+
+  }
+}
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+								Another Method
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  
+	     // 1. define Des Cop: 
+	     
+	 
+
+
+	    	 DesiredCapabilities cap = new DesiredCapabilities();
+	    	  cap.setBrowserName("chrome");
+	    	  cap.setPlatform(Platform.MAC); 
+	    	  
+	    	 //2. Chrome Options definition: 
+
+	    	 ChromeOptions options = new ChromeOptions();
+	    	 options.merge(cap); 
+	    	 
+	    	 String hubUrl = "http://192.168.0.102:4444/wd/hub"; 
+	    	 WebDriver driver = new RemoteWebDriver(new URL(hubUrl),cap); 
+	    	 driver.get("http://www.freecre.cow"); 
+	    	 System.out.println(driver.getTitle());
+--------------------------------------------------------------------------------------------------------------------------
+
+// FireFox
+		
+		  WebDriver driver;
+		  DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+		
+	      capabilities.setCapability(FirefoxDriver.BINARY,new File("C:/Program Files (x86)/Mozilla Firefox/firefox.exe").getAbsolutePath());
+	      capabilities.setCapability("marionette", false);
+	      driver = new RemoteWebDriver(new URL("http://192.168.0.12:5566/wd/hub"), capabilities);
+	     // driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);	
+		  
+		  
+	   //  driver.manage().window().maximize();
+	      
+	     driver.get("http://google.com");
+	     System.out.println(driver.getTitle());
+	     
+	
+	
+	
+
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+
+
+
+
+
+
+
